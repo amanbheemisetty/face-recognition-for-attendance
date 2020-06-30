@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:rgb(204, 242, 255);">
+<style>
+.searchbar{
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  background-color:black;
+  border-radius:10px;
+}
+</style>
+
+<nav class="navbar navbar-light bg-light">
+    <span style="font-family:Verdana; font-size:30px;"align="center"><b>Automated Attendance System</b></span>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><span style="font-family:Verdana; font-size:21px;"align="center"><b>{{session['user']}}</b></span></li>
+    </ul>
+</nav>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('adminpanel') }}">Admin Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Add Student</a></li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">LogOut</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <form method="post" style="margin-top:1%;">
+        <div class="searchbar">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" >From Date :</span>
+                      </div>
+                      <input type="date" name="fromdate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" >To Date : </span>
+                      </div>
+                      <input type="date" name="todate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="col-lg-2"><button class="btn btn-success btn-sm px-5" type="submit">Submit</button></div>
+            </div>
+        </div>
+    </form>
+    {% if attendance %}
+    <h4 align="center" style="font-family: Verdana;margin-top:10px;">Students Attendance Report</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Sl no.</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Present on</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for row in attendance %}
+            <tr>
+                <td scope="row">{{row.0}}</td><td>{{row.1}}</td><td>{{row.2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+</div>
+</body>
+</html>

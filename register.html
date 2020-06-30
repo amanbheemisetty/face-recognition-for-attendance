@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:rgb(204, 242, 255);">
+
+<nav class="navbar navbar-light bg-light">
+    <span style="font-family:Verdana; font-size:30px;"align="center"><b>Automated Attendance System</b></span>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><span style="font-family:Verdana; font-size:21px;"align="center"><b>{{session['user']}}</b></span></li>
+    </ul>
+</nav>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('adminpanel') }}">Admin Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('generatereport') }}">Generate Report</a></li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">LogOut</a></li>
+    </ul>
+</nav>
+{% if message=='success' %}
+<script>alert("registration successfull");</script>
+{% endif%}
+<h4 align="center" style="font-family: Verdana;margin-top:10px;">Student Registration</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="{{ url_for('register') }}" method="post" enctype="multipart/form-data" class="form-control mt-4">
+                <label for="uname"><b>Username:</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id="uname" class="form-control" required>
+                <img src="" id="clicked" name="clicked" width="350" height="250" style="margin: 10px 70px 10px 70px;">
+                <input type="text" name="imagepath" id="imagepath" hidden required>
+                <label for="phone"><b>Mobile number:</b></label>
+                <input type="number" placeholder="Enter Mobile number" name="phone" id="phone" class="form-control" required>
+                <label for="email"><b>Email:</b></label>
+                <input type="email" placeholder="Enter Email ID" name="email" id="email" class="form-control" required>
+                <label for="addr"><b>Address:</b></label>
+                <input type="text" placeholder="Enter Address" name="addr" id="addr" class="form-control" required>
+                <button type="submit" class="form-control mt-2" style="background-color:green;color:white;">Register</button>
+            </form>
+        </div>
+        <div class="col-lg-6 mt-4">
+                <img src="{{ url_for('register_feed') }}" height="340" class="form-control">
+            <button id="captureimage" name="captureimage" onclick="myfunction()" class="form-control mt-2" style="background-color:green;color:white;">Capture image</button>
+        </div>
+    </div>
+</div>
+<script>
+$('#clicked').hide();
+function myfunction(e){
+    $.ajax({
+        url: '/captureimage',
+        success: function (data) {
+        $('#clicked').attr('src',data);
+        $('#clicked').show();
+        if(data != 'static/error_face.jpg'){
+            $('#imagepath').val(data);
+        }
+
+        },
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:rgb(204, 242, 255);">
+
+{% if message %}
+<script>alert("{{message}}");</script>
+{% endif%}
+<nav class="navbar navbar-light bg-light">
+    <span style="font-family:Verdana; font-size:30px;"align="center"><b>Automated Attendance System</b></span>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><span style="font-family:Verdana; font-size:21px;"align="center"><b>{{session['user']}}</b></span></li>
+    </ul>
+</nav>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Add Student</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('generatereport') }}">Generate Report</a></li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">LogOut</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Student Photo</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Student Email</th>
+            <th scope="col">Student Address</th>
+            <th scope="col">Attendance</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for row in adminpanel %}
+            <tr>
+                <td scope="row"><a href="{{ url_for('showattendance',id=row.0)}}"><img src="{{row.2}}" width="70" height="70"></a></td><td>{{row.1}}</td><td>{{row.3}}</td><td>{{row.4}}</td><td>{{row.5}}</td><td>{% if row.0 is in attendance %} Present {% else %}<a href="{{ url_for('sendMail',id=row.0)}}">Send Mail</a>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
