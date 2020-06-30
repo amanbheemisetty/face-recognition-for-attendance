@@ -1,0 +1,36 @@
+--environment setup--
+
+#install python-3.6.6
+#install IDE Pycharm
+#create new project(it creates new virtual environment), install libraries
+
+#libraries required
+pip install flask
+pip install opencv-python
+pip install cmake
+pip install dlib / python -m pip install https://files.pythonhosted.org/packages/0e/ce/f8a3cff33ac03a8219768f0694c5d703c8e037e6aba2e865f9bae22ed63c/dlib-19.8.1-cp36-cp36m-win_amd64.whl#sha256=794994fa2c54e7776659fddb148363a5556468a6d5d46be8dad311722d54bfcf
+pip install face-recognition
+
+#install mysql
+
+# go to python interpreter scripts directory and install mysql connector
+# example: C:\Users\Abdul\AppData\Local\Programs\Python\Python36\Scripts
+python -m pip install mysql-connector
+
+#create database atomatedattendance
+import atomatedattendance.sql file
+
+#run runfile.py
+
+#login
+username:admin
+password:admin123
+
+#add student
+#enter all details and select a valid student image which should have clear face visibility
+#logout system will detect the person and insert attendance in database
+
+#click on image in admin panel it displays attendance of that student
+#generate reports shows the attendance of all students
+
+#add MAIL_USERNAME and MAIL_PASSWORD in runfile.py
