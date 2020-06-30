@@ -33,4 +33,6 @@ password:admin123
 #click on image in admin panel it displays attendance of that student
 #generate reports shows the attendance of all students
 
+create a folder static and add two new folder named student image and temp
+
 #add MAIL_USERNAME and MAIL_PASSWORD in runfile.py
